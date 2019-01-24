@@ -19,10 +19,19 @@ public extension BinaryDecodable {
 /// The actual binary decoder class.
 public class BinaryDecoder {
     fileprivate let data: [UInt8]
-    fileprivate var cursor = 0
-    
+    fileprivate(set) public var cursor = 0
+
     public init(data: [UInt8]) {
         self.data = data
+    }
+
+    public func lookahead(_ bytes: Int) throws -> ArraySlice<UInt8> {
+        if (bytes > data.count - cursor) {
+            throw Error.prematureEndOfData
+        }
+        let amount = bytes - 1
+
+        return data[cursor...(cursor+amount)]
     }
 }
 
