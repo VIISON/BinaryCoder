@@ -22,5 +22,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.exclude_files = 'BinaryEncoderTests'
-  s.source_files = '**/*'
+  s.source_files = '**/*.swift'
 end
